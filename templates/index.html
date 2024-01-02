@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- <script src="https://d3js.org/d3.v7.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"
+        integrity="sha512-M7nHCiNUOwFt6Us3r8alutZLm9qMt4s9951uo8jqO4UwJ1hziseL6O3ndFyigx6+LREfZqnhHxYjKRJ8ZQ69DQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="https://unpkg.com/d3-3d@3.0.4/build/d3-3d.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/chart.js') }}"></script>
+    <title>LETS XSS SPOTIFY</title>
+</head>
+
+<body>
+    <!-- 使用 home 路由的數據 -->
+    <h2>currently playing = {{ current_track }}</h2>
+
+    <!-- 使用 about 路由的數據 -->
+    <h2>top 50's total = {{ top_50_artist }}</h2>
+
+    <!-- 其他 HTML 和 JavaScript 代碼 -->
+    <script src="{{ url_for('static', filename='js/d3.js') }}"></script>
+
+    <div style="width: 80%; margin: auto;">
+        <canvas id="Genres_doughnut"></canvas>
+    </div>
+    <script>
+        genere_doughnut();
+        function genere_doughnut() {
+            var data = {{ top_50_artist | safe
+        }};
+        var doughnut_genere = new Chart(document.getElementById('Genres_doughnut').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: data['name'],
+                datasets: [{
+                    data: data['count']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        }
+    </script>
+</body>
+
+</html>
