@@ -24,6 +24,7 @@ def get_currently_playing_track():
     except:
         print('親 請登入')
         return redirect("/")
+        # return "NULL"
 
     sp = spotipy.Spotify(auth=token_info['access_token'])
     current_playing_track = sp.current_user_playing_track()['item']['name']
@@ -62,7 +63,58 @@ def get_users_top_artist():
     final_json = json.dumps(result_json, ensure_ascii=False)
     return final_json
 
+def get_recent_3_artist():
+    try: 
+        token_info = get_token()
+    except:
+        print('親 請登入')
+        return redirect("/")
 
+    sp = spotipy.Spotify(auth=token_info['access_token'])
+    recent_3_artist = sp.current_user_top_artists(limit=3,time_range='short_term')
+    data_dict = recent_3_artist
+    # print(data_dict)
+    return data_dict
+
+def get_recent_tracks():
+    try: 
+        token_info = get_token()
+    except:
+        print('親 請登入')
+        return redirect("/")
+
+    sp = spotipy.Spotify(auth=token_info['access_token'])
+    top_tracks = sp.current_user_top_tracks(limit=50,time_range='medium_term')
+    
+    track_list = []
+    popu_total = 0
+
+    for i in range(len(top_tracks['items'])):
+        track_list.append(top_tracks['items'][i]['id'])
+        popu_total += top_tracks['items'][i]['popularity']
+    popu_total = round(popu_total/50, 1)
+   
+
+    # 交叉比對用
+    # artist_names = [artist['name'] for item in top_tracks['items'] for artist in item['artists']]
+    # df = pd.DataFrame(artist_names, columns=['ArtistName'])
+    # artist_counts = df['ArtistName'].value_counts()
+    # print(artist_counts)
+    return track_list, popu_total
+
+def calculate_feature(id_collection):
+    try: 
+        token_info = get_token()
+    except:
+        print('親 請登入')
+        return redirect("/")
+
+    sp = spotipy.Spotify(auth=token_info['access_token'])
+    feature_raw = sp.audio_features(tracks=id_collection)
+    df = pd.json_normalize(feature_raw)
+    average_values = [df['instrumentalness'].mean(),df['energy'].mean(),df['speechiness'].mean(),df['valence'].mean(),df['tempo'].mean(),df['danceability'].mean()]
+
+    return average_values
 # route to handle logging in
 @app.route('/')
 def login():
@@ -88,35 +140,12 @@ def redirect_page():
 @app.route('/homepage')
 def to_home():
     top_artist_data = get_users_top_artist()
-    currently_playing_data = get_currently_playing_track()
-    return render_template('index.html', top_50_artist=top_artist_data, current_track=currently_playing_data)
-# def get_currently_playing_track():
-#     try: 
-#         token_info = get_token()
-#     except:
-#         print('親 請登入')
-#         return redirect("/")
-
-#     sp = spotipy.Spotify(auth=token_info['access_token'])
-#     current_playing_track = sp.current_user_playing_track()['item']['name']
-#     print(f'SONG={current_playing_track}')
-#     # return 'GET SUCCESS'
-#     return redirect(url_for('get_users_top_artist', _external=True))
-
-# API-常聽50
-# @app.route('/topArtists')
-# def get_users_top_artist():
-#     try: 
-#         token_info = get_token()
-#     except:
-#         print('親 請登入')
-#         return redirect("/")
-
-#     sp = spotipy.Spotify(auth=token_info['access_token'])
-#     recent_top_artist = sp.current_user_top_tracks(limit=5,time_range='medium_term')['total']
-#     print(recent_top_artist)
-#     return 'RECENT ARTIST SUCCESS'
-
+    currently_playing_data = "NULL"
+    # currently_playing_data = get_currently_playing_track()
+    recent_3_artist = get_recent_3_artist()
+    recent_tracks = get_recent_tracks() #[0]=track_id, [1]=track_popu_ttl
+    analyze_result = calculate_feature(recent_tracks[0])
+    return render_template('index.html', top_50_artist=top_artist_data, current_track=currently_playing_data, recent_3_artist = recent_3_artist, recent_tracks_id=recent_tracks[0], recent_tracks_pop = recent_tracks[1], analyze_result=analyze_result)
 
 # function to get the token info from the session
 def get_token():

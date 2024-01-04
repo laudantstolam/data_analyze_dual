@@ -1,3 +1,56 @@
-html {
-    background-color:bisque;
+html, body {
+    background-color:rgb(40, 40, 40);
+    color: beige;
+}
+
+h1, h2, p {
+    /* color: beige; */
+    /* transform-style: preserve-3d; */
+}
+
+.double_genere{
+    transform-style: preserve-3d;
+}
+
+.left{
+    margin-top: -10%;
+}
+
+.shelf{
+    margin-left: 1%;
+}
+
+.L1{
+    position: relative;
+    z-index: 1;
+}
+
+.L2{
+    position: relative;
+    z-index: 2;
+}
+
+.L3{
+    position: relative;
+    z-index: 3;
+}
+
+.L4{
+    position: relative;
+    z-index: 4;
+}
+
+.cube {
+    width: 100px;
+    height: 100px;
+    /* 设置图片的URL */
+    background-image: url('https://i.scdn.co/image/ab676161000051746cab9e007b77913d63f12835');
+    background-size: cover; /* 保持图片充满容器 */
+    /* margin: 100px auto; */
+    /* animation: rotateCube 5s infinite linear; */
+  }
+
+.three_cube {
+    position: relative;
+    transform: rotateX(22deg) rotateY(130deg) rotateZ(0deg);
 }
