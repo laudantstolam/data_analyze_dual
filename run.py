@@ -67,6 +67,7 @@ def get_users_top_artist():
     # TEMP 存檔點
     # with open('static/users_top_artist.json', 'w') as file:
     #     json.dump(final_json, file)
+    print(final_json)
     return final_json
 
 def get_recent_3_artist():

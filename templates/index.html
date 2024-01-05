@@ -29,6 +29,12 @@
     <!-- font -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arima:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+
+    <!-- EMBED -->
+    <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
     <title>LETS XSS SPOTIFY</title>
 </head>
 
@@ -67,6 +73,7 @@
         </div>
         <div class="col-3">
             <div class="three_cube">
+                YOUR TREND ARTIST
                 <div class="row mb-3">
                     <a href="{{ recent_3_artist[0]['url'] }}" class="cube" id="A0" style="margin-right: 3%;"
                         data-text="{{ recent_3_artist[0]['name'] }}"></a>
@@ -75,25 +82,31 @@
                     <a href="{{ recent_3_artist[2]['url'] }}" class="cube" id="A2"
                         data-text="{{ recent_3_artist[2]['name'] }}"></a>
                 </div>
+                MY TREND ARTIST
                 <div class="row">
-                    <div class="cube" style="margin-right: 3%;"></div>
-                    <div class="cube" style="margin-right: 3%;"></div>
-                    <div class="cube"></div>
+
+                    <a href="" class="cube" id="B0" style="margin-right: 3%;" data-text=""></a>
+                    <a href="" class="cube" id="B1" style="margin-right: 3%;" data-text=""></a>
+                    <a href="" class="cube" id="B2" data-text=""></a>
+
                 </div>
             </div>
         </div>
         <div class="col-5">
             <div class="row RADAR" style="margin-top: 25%;">
                 <div class="col-6" id="radar"></div>
-                <div class="col-6 d-flex align-items-center ">
-                    <p style="color: cadetblue;">The KEYWORD of your music taste is</p>
-
-
+                <div class="col-6 d-flex flex-column align-items-center justify-content-center">
+                    <p style="font-family: 'Arima', cursive; color:rgb(251, 171, 142);">The KEYWORD of your
+                        music taste is</p>
+                    <p style="font-family: 'Arima', cursive; color:crgb(251, 171, 142);font-size: x-large;">High
+                        energy, Blue
                 </div>
             </div>
 
         </div>
-        <!-- <div class="col-2">4</div> -->
+
+    </div>
+    <!-- <div class="col-2">4</div> -->
     </div>
     <div class="row" style="margin-top: -5%;">
         <div class="col-3"></div>
@@ -119,8 +132,26 @@
 
         </div>
 
-
     </div>
+
+    <div class="circle L3" style="margin-top: -14%;margin-left: 27%;" id="circle">
+        <div class="text">Get Recommend playlist</div>
+    </div>
+    <div class="L4" id="playlist" style="display: none; margin-top: -4%; margin-left: 22%;">
+        <iframe title="Spotify Embed: Recommendation Playlist"
+            src="https://open.spotify.com/embed/playlist/6rEmOxLIyUjufEXs5a1aDZ?utm_source=generator&theme=0"
+            width="28%" height="100%" frameborder="1%"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+    <script>
+        const circle = document.getElementById('circle');
+        const playlist = document.getElementById('playlist');
+
+        circle.addEventListener('click', () => {
+            playlist.style.display = playlist.style.display === 'block' ? 'none' : 'block';
+        });
+    </script>
+
     <!-- <h2>currently playing = {{ current_track }}</h2> -->
     <!-- <p>{{ recent_3_artist }}</p> -->
     <!-- 使用 home 路由的數據 -->
@@ -135,79 +166,92 @@
     <script>
         // 資料
         // 在兩個容器中分別創建餅圖
-        createPieChart("double_genere1");
-        createPieChart("double_genere2");
-        function createPieChart(containerId) {
-            var data2 = {{ top_50_artist| safe
+        livedata = {{
+            top_50_artist | safe
         }};
-        data = data2['count'];
-        // 餅狀圖的寬度和高度
-        var width = 170;
-        var height = 170;
+        // livedata = livedata['count'];
+        createPieChart("double_genere1", livedata);
+        // 使用 JavaScript 讀取 JSON 檔案
+        fetch('static/users_top_artist.json')
+            .then(response => response.json())
+            .then(data => {
+                // 在這裡使用 data 對 HTML 做相應的操作
+                console.log(data);
+                createPieChart("double_genere2", data);
 
-        var svg = d3.select("#" + containerId)
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height)
-            .append("g")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-        // 定義餅狀圖的弧形函數
-        var arc = d3.arc()
-            .innerRadius(width / 5) // 內半徑，即甜甜圈的大小
-            .outerRadius(Math.min(width, height) / 2);
-
-        // 創建一個D3.js的餅狀圖
-        var pie = d3.pie();
-        // 設定漸層顏色
-        var colors = generateColors(data.length);
-
-        // 自定義排序，確保標籤的順序與圓弧一致
-        var sortedData = pie(data).sort(function (a, b) {
-            return a.index - b.index;
-        });
-        /* console.log(sortedData); */
-
-
-
-
-        // 添加圓弧到SVG容器
-        var arcs = svg.selectAll("path")
-            .data(sortedData)
-            .enter()
-            .append("path")
-            .attr("d", arc)
-            .attr("fill", function (d, i) {
-                // 使用漸層顏色
-                return colors[i];
-            }); // 將陰影應用到圓弧上
-
-        // 添加標籤
-        var labels = svg.selectAll("text")
-            .data(sortedData)
-            .enter()
-            .append("text")
-            .text(function (d) {
-                return data2['name'][d.index];
             })
-            .attr("transform", function (d) {
-                return "translate(" + arc.centroid(d) + ")";
+
+        function createPieChart(containerId, livedata) {
+            console.log(typeof (livedata));
+            data = livedata['count'];
+            data2 = livedata;
+            // 餅狀圖的寬度和高度
+            var width = 170;
+            var height = 170;
+
+            var svg = d3.select("#" + containerId)
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .append("g")
+                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+            // 定義餅狀圖的弧形函數
+            var arc = d3.arc()
+                .innerRadius(width / 5) // 內半徑，即甜甜圈的大小
+                .outerRadius(Math.min(width, height) / 2);
+
+            // 創建一個D3.js的餅狀圖
+            var pie = d3.pie();
+            // 設定漸層顏色
+            var colors = generateColors(data.length);
+
+            // 自定義排序，確保標籤的順序與圓弧一致
+            var sortedData = pie(data).sort(function (a, b) {
+                return a.index - b.index;
+            });
+            /* console.log(sortedData); */
+
+
+
+
+            // 添加圓弧到SVG容器
+            var arcs = svg.selectAll("path")
+                .data(sortedData)
+                .enter()
+                .append("path")
+                .attr("d", arc)
+                .attr("fill", function (d, i) {
+                    // 使用漸層顏色
+                    return colors[i];
+                }); // 將陰影應用到圓弧上
+
+            // 添加標籤
+            var labels = svg.selectAll("text")
+                .data(sortedData)
+                .enter()
+                .append("text")
+                .text(function (d) {
+                    return data2['name'][d.index];
+                })
+                .attr("transform", function (d) {
+                    return "translate(" + arc.centroid(d) + ")";
+                })
+                .style("text-anchor", "middle")
+                .style("fill", "#F37D0E")
+                .style("font-family", "'Arima', sans-serif") // 设置 Google Fonts 字体
+                .attr("opacity", 0) // 初始將標籤設為透明
+
+
+            // 添加事件處理
+            arcs.on("mouseover", function (d, i) {
+                labels.attr("opacity", function (labelData, labelIndex) {
+                    return labelIndex === i.index ? 1 : 0;
+                });
             })
-            .style("text-anchor", "middle")
-            .style("fill", "#F37D0E")
-            .style("font-family", "'Arima', sans-serif") // 设置 Google Fonts 字体
-            .attr("opacity", 0) // 初始將標籤設為透明
-
-
-        // 添加事件處理
-        arcs.on("mouseover", function (d, i) {
-            labels.attr("opacity", function (labelData, labelIndex) {
-                return labelIndex === i.index ? 1 : 0;
-            });
-        })
-            .on("mouseout", function (d, i) {
-                labels.attr("opacity", 0);
-            });
+                .on("mouseout", function (d, i) {
+                    labels.attr("opacity", 0);
+                });
         }
         // 產生漸層顏色
         function generateColors(count) {
@@ -234,7 +278,21 @@
         document.getElementById('A0').style.backgroundImage = "url('{{ recent_3_artist[0]['img'] }}')";
         document.getElementById('A1').style.backgroundImage = "url('{{ recent_3_artist[1]['img'] }}')";
         document.getElementById('A2').style.backgroundImage = "url('{{ recent_3_artist[2]['img'] }}')";
-
+        fetch('static/recent_3_artist.json')
+            .then(response => response.json())
+            .then(data => {
+                // 在這裡使用 data 對 HTML 做相應的操作
+                console.log(data);
+                document.getElementById('B0').style.backgroundImage = `url('${data[0].img}')`;
+                document.getElementById('B0').setAttribute('data-text', data[0].name);
+                document.getElementById('B0').href = data[0].url
+                document.getElementById('B1').style.backgroundImage = `url('${data[1].img}')`;
+                document.getElementById('B1').setAttribute('data-text', data[1].name);
+                document.getElementById('B1').href = data[1].url
+                document.getElementById('B2').style.backgroundImage = `url('${data[2].img}')`;
+                document.getElementById('B2').setAttribute('data-text', data[2].name);
+                document.getElementById('B2').href = data[2].url
+            })
     </script>
 
     <!-- RADER -->
@@ -360,6 +418,7 @@
     </script> -->
 
     <script>
+
         let data = [];
         let features = ['instrumental', 'energetic', 'mood', 'tempo', 'rhythmic'];
         // //generate the data
@@ -373,7 +432,7 @@
         // console.log(data);
         API_data = {{ analyze_result | safe }}
 
-        API_data2 = [2, 3, 4, 5, 6];
+        API_data2 = [2.1500166160000003, 5.929859999999999, 4.152900000000001, 5.432358000000001, 5.8458000000000006];
         // 生成新的數據
         for (var i = 0; i < 1; i++) {
             var point = {};

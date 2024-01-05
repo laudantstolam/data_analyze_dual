@@ -1,1 +1,17 @@
-[{"name": "Yuuri", "img": "https://i.scdn.co/image/ab676161000051742a98f9ecf7217c8f910f9f83", "url": "https://open.spotify.com/artist/0ixzjrK1wkN2zWBXt3VW3W"}, {"name": "Alec Benjamin", "img": "https://i.scdn.co/image/ab676161000051746cab9e007b77913d63f12835", "url": "https://open.spotify.com/artist/5IH6FPUwQTxPSXurCrcIov"}, {"name": "ONE OK ROCK", "img": "https://i.scdn.co/image/ab676161000051748d23b8a8834a0057adf617f3", "url": "https://open.spotify.com/artist/7k73EtZwoPs516ZxE72KsO"}]
+[
+  {
+    "name": "Yuuri",
+    "img": "https://i.scdn.co/image/ab676161000051742a98f9ecf7217c8f910f9f83",
+    "url": "https://open.spotify.com/artist/0ixzjrK1wkN2zWBXt3VW3W"
+  },
+  {
+    "name": "Alec Benjamin",
+    "img": "https://i.scdn.co/image/ab676161000051746cab9e007b77913d63f12835",
+    "url": "https://open.spotify.com/artist/5IH6FPUwQTxPSXurCrcIov"
+  },
+  {
+    "name": "ONE OK ROCK",
+    "img": "https://i.scdn.co/image/ab676161000051748d23b8a8834a0057adf617f3",
+    "url": "https://open.spotify.com/artist/7k73EtZwoPs516ZxE72KsO"
+  }
+]
