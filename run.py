@@ -27,13 +27,15 @@ def get_currently_playing_track():
         # return "NULL"
 
     sp = spotipy.Spotify(auth=token_info['access_token'])
-    current_playing_track = sp.current_user_playing_track()['item']['name']
-    print(f'SONG={current_playing_track}')
+    current_playing_track = sp.current_user_playing_track()['item']
+    current_playing=current_playing_track['name']
+    track_url = current_playing_track['preview_url']
+    
     # return 'GET SUCCESS'
     # TEMP 存檔點
     # with open('static/currently_playing_track.json', 'w') as file:
     #     json.dump(current_playing_track, file)
-    return current_playing_track
+    return current_playing, track_url
 
 def get_users_top_artist():
     try: 
@@ -161,7 +163,8 @@ def redirect_page():
 def to_home():
     top_artist_data = get_users_top_artist()
     currently_playing_data = "NULL"
-    # currently_playing_data = get_currently_playing_track()
+    currently_playing_data = get_currently_playing_track()
+    print(currently_playing_data)
     recent_3_artist = get_recent_3_artist()
     recent_tracks = get_recent_tracks() #[0]=track_id, [1]=track_popu_ttl
     analyze_result = calculate_feature(recent_tracks[0])
