@@ -35,17 +35,18 @@
 <body>
     <div class="row">
         <div class="col-3 shelf">
-            <div class="mt-5">
+            <div style="margin-top: 58%;">
                 <div id="double_genere1"
                     style="transform: rotateX(6deg) rotateY(38deg) rotateZ(-19deg);margin-top: -13%;" class="left L3">
                 </div>
                 <div class="left L2" style="display: flex;">
-                    <svg width="295" height="101" viewBox="0 0 295 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M189.083 1L294 15.85V27.1L102.3 100L1 78.85V65.8L189.083 1Z" fill="black" />
+                    <svg width="234" height="81" viewBox="0 0 234 81" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M149.926 1L233 12.85V21.8273L81.2104 80L1 63.1227V52.7091L149.926 1Z" fill="black" />
                         <path
-                            d="M1 65.8L102.3 86.5M1 65.8L189.083 1L294 15.85M1 65.8V78.85L102.3 100M102.3 86.5L294 15.85M102.3 86.5V100M294 15.85V27.1L102.3 100"
+                            d="M1 52.7091L81.2104 69.2273M1 52.7091L149.926 1L233 12.85M1 52.7091V63.1227L81.2104 80M81.2104 69.2273L233 12.85M81.2104 69.2273V80M233 12.85V21.8273L81.2104 80"
                             stroke="#DBDBDB" />
                     </svg>
+
 
                 </div>
                 <div id="double_genere2"
@@ -53,35 +54,75 @@
                 </div>
 
                 <div class="left">
-                    <svg width="295" height="101" viewBox="0 0 295 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M189.083 1L294 15.85V27.1L102.3 100L1 78.85V65.8L189.083 1Z" fill="black" />
+                    <svg width="234" height="81" viewBox="0 0 234 81" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M149.926 1L233 12.85V21.8273L81.2104 80L1 63.1227V52.7091L149.926 1Z" fill="black" />
                         <path
-                            d="M1 65.8L102.3 86.5M1 65.8L189.083 1L294 15.85M1 65.8V78.85L102.3 100M102.3 86.5L294 15.85M102.3 86.5V100M294 15.85V27.1L102.3 100"
+                            d="M1 52.7091L81.2104 69.2273M1 52.7091L149.926 1L233 12.85M1 52.7091V63.1227L81.2104 80M81.2104 69.2273L233 12.85M81.2104 69.2273V80M233 12.85V21.8273L81.2104 80"
                             stroke="#DBDBDB" />
                     </svg>
+
 
                 </div>
             </div>
         </div>
         <div class="col-3">
             <div class="three_cube">
-                <div class="row ">
-                    <div class="cube" id="A0"></div>
-                    <div class="cube" id="A1"></div>
-                    <div class="cube" id="A2"></div>
+                <div class="row mb-3">
+                    <a href="{{ recent_3_artist[0]['url'] }}" class="cube" id="A0" style="margin-right: 3%;"
+                        data-text="{{ recent_3_artist[0]['name'] }}"></a>
+                    <a href="{{ recent_3_artist[1]['url'] }}" class="cube" id="A1" style="margin-right: 3%;"
+                        data-text="{{ recent_3_artist[1]['name'] }}"></a>
+                    <a href="{{ recent_3_artist[2]['url'] }}" class="cube" id="A2"
+                        data-text="{{ recent_3_artist[2]['name'] }}"></a>
                 </div>
                 <div class="row">
-                    <div class="cube"></div>
-                    <div class="cube"></div>
+                    <div class="cube" style="margin-right: 3%;"></div>
+                    <div class="cube" style="margin-right: 3%;"></div>
                     <div class="cube"></div>
                 </div>
             </div>
         </div>
-        <div class="col-3">MUSIC DASH</div>
-        <div class="col-2">4</div>
+        <div class="col-5">
+            <div class="row RADAR" style="margin-top: 25%;">
+                <div class="col-6" id="radar"></div>
+                <div class="col-6 d-flex align-items-center ">
+                    <p style="color: cadetblue;">The KEYWORD of your music taste is</p>
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- <div class="col-2">4</div> -->
     </div>
-    <h2>currently playing = {{ current_track }}</h2>
-    <p>{{ recent_3_artist }}</p>
+    <div class="row" style="margin-top: -5%;">
+        <div class="col-3"></div>
+        <div class="col-3 L2">
+            <svg width="389" height="257" viewBox="0 0 389 257" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 256L1 250.75V45.25L183.625 1L190 4.375V9.05114L388 48.9471V244.75L179.5 201.399L7 256Z"
+                    fill="black" />
+                <path
+                    d="M1 45.25L7 49M1 45.25V250.75L7 256M1 45.25L183.625 1L190 4.375M7 49V256M7 49L179.5 6.93545M7 256L179.5 201.399M190 4.375L179.5 6.93545M190 4.375V9.05114M179.5 6.93545V201.399M179.5 6.93545L190 9.05114M179.5 201.399L388 244.75V48.9471L190 9.05114"
+                    stroke="white" stroke-width="2" stroke-linejoin="round" />
+            </svg>
+        </div>
+        <div class="col-3 L1" style="margin-left: -9%;margin-top: -1%;">
+            <svg width="624" height="278" viewBox="0 0 624 278" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M26.9167 85.6573L257.575 1L567.711 49.8075V78.3146L552.161 85.8316L623 96.8873V125.826L558.208 156.9V169.883L335.757 277L16.9819 207.46V177.225L54.1292 163.513L1 151.91V121.939L26.9167 112.437V85.6573Z"
+                    fill="black" />
+                <path
+                    d="M26.9167 85.6573L346.124 151.742M26.9167 85.6573L257.575 1L567.711 49.8075M26.9167 85.6573V112.437M346.124 185.432V151.742M346.124 185.432L332.733 182.497M346.124 185.432L543.09 90.2165M346.124 151.742L567.711 49.8075M567.711 49.8075V78.3146L552.161 85.8316M332.733 182.497L26.9167 115.46V112.437M332.733 182.497L320.639 188.023M320.639 188.023V221.714M320.639 188.023L1 121.939M320.639 221.714L54.1292 163.513M320.639 221.714L330.142 217.119M543.09 90.2165V114.164L377.656 194.148M543.09 90.2165L552.161 85.8316M26.9167 112.437L1 121.939M1 121.939V151.91L54.1292 163.513M54.1292 163.513L16.9819 177.225M16.9819 177.225V207.46L335.757 277M16.9819 177.225L335.757 243.742M335.757 277V243.742M335.757 277L558.208 169.883V156.9M335.757 243.742L373.336 226.563M330.142 217.119L377.656 194.148M330.142 217.119L373.336 226.563M400.549 232.512V199.254M400.549 232.512L558.208 156.9M400.549 232.512L373.336 226.563M400.549 199.254L377.656 194.148M400.549 199.254L623 96.8873M623 96.8873L552.161 85.8316M623 96.8873V125.826L558.208 156.9"
+                    stroke="white" stroke-width="2" stroke-linejoin="round" />
+            </svg>
+
+
+        </div>
+
+
+    </div>
+    <!-- <h2>currently playing = {{ current_track }}</h2> -->
+    <!-- <p>{{ recent_3_artist }}</p> -->
     <!-- 使用 home 路由的數據 -->
 
     <!-- 使用 about 路由的數據 -->
@@ -99,13 +140,10 @@
         function createPieChart(containerId) {
             var data2 = {{ top_50_artist| safe
         }};
-        let data = [30, 40, 50, 20];
-        console.log(data2['count']);
-        console.log(data);
         data = data2['count'];
         // 餅狀圖的寬度和高度
-        var width = 200;
-        var height = 200;
+        var width = 170;
+        var height = 170;
 
         var svg = d3.select("#" + containerId)
             .append("svg")
@@ -129,6 +167,10 @@
             return a.index - b.index;
         });
         /* console.log(sortedData); */
+
+
+
+
         // 添加圓弧到SVG容器
         var arcs = svg.selectAll("path")
             .data(sortedData)
@@ -138,7 +180,7 @@
             .attr("fill", function (d, i) {
                 // 使用漸層顏色
                 return colors[i];
-            });
+            }); // 將陰影應用到圓弧上
 
         // 添加標籤
         var labels = svg.selectAll("text")
@@ -188,26 +230,271 @@
 
     <!-- album-3artist -->
     <script>
-        let second_artist = [];
-        data1 = {{ recent_3_artist | tojson(indent = 2) }};
-        // 藝人 name
-        let artist_name = [];
-        // 藝人圖片
-        let artist_img = [];
-        // 藝人 popularity
-        let artist_pop = [];
 
-        for (i = 0; i < 3; i++) {
-            artist_name.push(data1['items'][i]['name']);
-            artist_img.push('url(' + data1['items'][i]['images'][1]['url'] + ')');
-            artist_pop.push(data1['items'][i]['popularity'])
+        document.getElementById('A0').style.backgroundImage = "url('{{ recent_3_artist[0]['img'] }}')";
+        document.getElementById('A1').style.backgroundImage = "url('{{ recent_3_artist[1]['img'] }}')";
+        document.getElementById('A2').style.backgroundImage = "url('{{ recent_3_artist[2]['img'] }}')";
+
+    </script>
+
+    <!-- RADER -->
+    <!-- <script>
+
+        var options = {
+            series: [{
+                name: 'Series 1',
+                data: [5, 2, 5, 7, 10],
+            }, {
+                name: 'Series 2',
+                data: {{ analyze_result| safe}},
+            }
+            ],
+        chart: {
+            height: 350,
+                type: 'radar',
+                    dropShadow: {
+                enabled: true,
+                    blur: 1,
+                        left: 1,
+                            top: 1
+            }
+        },
+        title: {
+            text: 'Radar Chart - Multi Series'
+        },
+        stroke: {
+            width: 2
+        },
+        fill: {
+            opacity: 0.1
+        },
+        markers: {
+            size: 0
+        },
+        xaxis: {
+            categories: ['instrumentalness', 'energy', 'valence', 'tempo', 'danceability']
+
         }
-        console.log(artist_img);
-        document.getElementById('A0').style.backgroundImage = artist_img[0];
-        document.getElementById('A1').style.backgroundImage = artist_img[1];
-        document.getElementById('A2').style.backgroundImage = artist_img[2];
+        };
+
+        var chart = new ApexCharts(document.querySelector("#radar"), options);
+        chart.render();
+    </script> -->
+    <!-- high -->
+    <!-- <script>
+        var options = {
+            series: [{
+                name: 'Males',
+                data: [0.4, 0.65, 0.76, 0.88, 1.5]
+            },
+            {
+                name: 'Females',
+                data: [-0.8, -1.05, -1.06, -1.18, -1.4]
+            }
+            ],
+            chart: {
+                type: 'bar',
+                height: 300,
+                stacked: true
+            },
+            colors: ['#008FFB', '#FF4560'],
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                    barHeight: '80%',
+                },
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                width: 1,
+                colors: ["#fff"]
+            },
+
+            grid: {
+                xaxis: {
+                    lines: {
+                        show: false
+                    }
+                }
+            },
+            yaxis: {
+                min: -5,
+                max: 5,
+                title: {
+                    // text: 'Age',
+                },
+            },
+            tooltip: {
+                shared: false,
+                x: {
+                    formatter: function (val) {
+                        return val
+                    }
+                },
+                y: {
+                    formatter: function (val) {
+                        return Math.abs(val) + "%"
+                    }
+                }
+            },
+            title: {
+                text: 'Mauritius population pyramid 2011'
+            },
+            xaxis: {
+                categories: ['85+', '80-84', '75-79', '70-74', '65-69'],
+                title: {
+                    text: 'Percent'
+                },
+                labels: {
+                    formatter: function (val) {
+                        return Math.abs(Math.round(val)) + "%"
+                    }
+                }
+            },
+        };
+
+        var chart = new ApexCharts(document.querySelector("#compare"), options);
+        chart.render();
+    </script> -->
+
+    <script>
+        let data = [];
+        let features = ['instrumental', 'energetic', 'mood', 'tempo', 'rhythmic'];
+        // //generate the data
+        // for (var i = 0; i < 2; i++) {
+        //     var point = {}
+        //     //each feature will be a random number from 1-9
+        //     features.forEach(f => point[f] = 1 + Math.random() * 8);
+        //     data.push(point);
+        // }
+        // API_data=[2.1500166160000003, 5.929859999999999, 4.152900000000001, 5.432358000000001, 5.8458000000000006]
+        // console.log(data);
+        API_data = {{ analyze_result | safe }}
+
+        API_data2 = [2, 3, 4, 5, 6];
+        // 生成新的數據
+        for (var i = 0; i < 1; i++) {
+            var point = {};
+            // 每個特徵將是對應 API_data 的值
+            features.forEach((f, index) => point[f] = API_data[index]);
+            data.push(point);
+        }
+
+        for (var i = 0; i < 1; i++) {
+            var point = {};
+            // 每個特徵將是對應 API_data 的值
+            features.forEach((f, index) => point[f] = API_data2[index]);
+            data.push(point);
+        }
+
+        console.log(data);
+
+        let width = 300;
+        let height = 250;
+        let svg = d3.select("#radar").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        let radialScale = d3.scaleLinear()
+            .domain([0, 10])
+            .range([0, 80]); // 調整雷達圖半徑
+
+        let ticks = [2, 4, 6, 8, 10];
+        svg.selectAll("circle")
+            .data(ticks)
+            .join(
+                enter => enter.append("circle")
+                    .attr("cx", width / 2)
+                    .attr("cy", height / 2)
+                    .attr("fill", "none")
+                    .attr("stroke", "white")
+                    .attr("stroke-opacity", 0.5)
+                    .attr("r", d => radialScale(d))
+            );
+        svg.selectAll(".ticklabel")
+            .data(ticks)
+            .join(
+                enter => enter.append("text")
+                    .attr("class", "ticklabel")
+                    .attr("x", width / 2 + 5)
+                    .attr("y", d => height / 2 - radialScale(d))
+                    .text(d => d.toString())
+            );
+
+        function angleToCoordinate(angle, value) {
+            let x = Math.cos(angle) * radialScale(value);
+            let y = Math.sin(angle) * radialScale(value);
+            return {
+                "x": width / 2 + x,
+                "y": height / 2 - y
+            };
+        }
+        let featureData = features.map((f, i) => {
+            let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
+            return {
+                "name": f,
+                "angle": angle,
+                "line_coord": angleToCoordinate(angle, 10),
+                "label_coord": angleToCoordinate(angle, 10.5)
+            };
+        });
+
+        // draw axis line
+        svg.selectAll("line")
+            .data(featureData)
+            .join(
+                enter => enter.append("line")
+                    .attr("x1", width / 2)
+                    .attr("y1", height / 2)
+                    .attr("x2", d => d.line_coord.x)
+                    .attr("y2", d => d.line_coord.y)
+                    .attr("stroke", "white")
+                    .attr("stroke-opacity", 0.5)
+
+            );
+
+        // draw axis label
+        svg.selectAll(".axislabel")
+            .data(featureData)
+            .join(
+                enter => enter.append("text")
+                    .attr("x", d => d.label_coord.x)
+                    .attr("y", d => d.label_coord.y)
+                    .text(d => d.name)
+                    .attr("fill", "white")
+                    .style("font-family", "'Arima', sans-serif") // 设置 Google Fonts 字体
 
 
+            );
+        let line = d3.line()
+            .x(d => d.x)
+            .y(d => d.y);
+        let colors = ["#ad80da", "#e5c442"];
+
+        function getPathCoordinates(data_point) {
+            let coordinates = [];
+            for (var i = 0; i < features.length; i++) {
+                let ft_name = features[i];
+                let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
+                coordinates.push(angleToCoordinate(angle, data_point[ft_name]));
+            }
+            return coordinates;
+        }
+        // draw the path element
+        svg.selectAll("path")
+            .data(data)
+            .join(
+                enter => enter.append("path")
+                    .datum(d => getPathCoordinates(d))
+                    .attr("d", line)
+                    .attr("stroke-width", 3)
+                    .attr("stroke", (_, i) => colors[i])
+                    .attr("fill", (_, i) => colors[i])
+                    .attr("stroke-opacity", 1)
+                    .attr("opacity", 0.5)
+            );
 
     </script>
 

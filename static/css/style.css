@@ -13,11 +13,11 @@ h1, h2, p {
 }
 
 .left{
-    margin-top: -10%;
+    margin-top: -6%;
 }
 
 .shelf{
-    margin-left: 1%;
+    margin-left: 2%;
 }
 
 .L1{
@@ -48,9 +48,45 @@ h1, h2, p {
     background-size: cover; /* 保持图片充满容器 */
     /* margin: 100px auto; */
     /* animation: rotateCube 5s infinite linear; */
+    /* box-shadow: 2% 3% 1% white; */
   }
+.cube:hover {
+    opacity: 0.7; /* 鼠标悬停时变成半透明 */
+}
+
+.cube::after {
+    content: attr(data-text); /* 显示的文字内容 */
+    transform: inherit;
+    color: beige;
+    font-size: 16px; /* 文字大小 */
+    opacity: 0; /* 初始设置为透明 */
+    transition: opacity 0.3s ease; /* 添加过渡效果 */
+}
+
+.cube:hover::after {
+    opacity: 1; /* 鼠标悬停时显示文字 */
+}
+  /* .cube::before {
+    content: "789";
+    position: absolute;
+    top: 0px;   
+    left: -12px;   
+    right: 50px;   
+    bottom: 6px;   
+    box-shadow: -7px -7px 0px rgba(248, 248, 248, 0.2); 
+    transform: inherit; /* 继承 .cube 的变换效果 
+} */
+
 
 .three_cube {
     position: relative;
-    transform: rotateX(22deg) rotateY(130deg) rotateZ(0deg);
+    transform: rotateX(28deg) rotateY(324deg) rotateZ(0deg);
+    margin-top: 35%;
+}
+
+.RADAR{
+    position: relative;
+    transform: rotateX(11deg) rotateY(394deg) rotateZ(0deg);
+    background-color:black;
+    border-radius: 10px 10px 10px 10px ;
 }

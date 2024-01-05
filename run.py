@@ -30,6 +30,9 @@ def get_currently_playing_track():
     current_playing_track = sp.current_user_playing_track()['item']['name']
     print(f'SONG={current_playing_track}')
     # return 'GET SUCCESS'
+    # TEMP 存檔點
+    # with open('static/currently_playing_track.json', 'w') as file:
+    #     json.dump(current_playing_track, file)
     return current_playing_track
 
 def get_users_top_artist():
@@ -61,6 +64,9 @@ def get_users_top_artist():
 
     # 將結果轉為 JSON 格式
     final_json = json.dumps(result_json, ensure_ascii=False)
+    # TEMP 存檔點
+    # with open('static/users_top_artist.json', 'w') as file:
+    #     json.dump(final_json, file)
     return final_json
 
 def get_recent_3_artist():
@@ -73,8 +79,18 @@ def get_recent_3_artist():
     sp = spotipy.Spotify(auth=token_info['access_token'])
     recent_3_artist = sp.current_user_top_artists(limit=3,time_range='short_term')
     data_dict = recent_3_artist
-    # print(data_dict)
-    return data_dict
+    name_img_link = []
+    for item in data_dict['items']:
+        name = item['name']
+        img_url = item['images'][1]['url']
+        url = item['external_urls']['spotify']
+        name_img_link.append({"name": name, "img": img_url, "url": url})
+
+    print(name_img_link)
+    # TEMP 存檔點
+    # with open('static/recent_3_artist.json', 'w') as file:
+    #     json.dump(name_img_link, file)
+    return name_img_link
 
 def get_recent_tracks():
     try: 
@@ -112,8 +128,11 @@ def calculate_feature(id_collection):
     sp = spotipy.Spotify(auth=token_info['access_token'])
     feature_raw = sp.audio_features(tracks=id_collection)
     df = pd.json_normalize(feature_raw)
-    average_values = [df['instrumentalness'].mean(),df['energy'].mean(),df['speechiness'].mean(),df['valence'].mean(),df['tempo'].mean(),df['danceability'].mean()]
-
+    average_values = [20*df['instrumentalness'].mean(),10*df['energy'].mean(),10*df['valence'].mean(),0.1*(df['tempo'].mean()-70),10*df['danceability'].mean()]
+    print(average_values)
+    # TEMP 存檔點
+    # with open('static/calculate_feature.json', 'w') as file:
+    #     json.dump(average_values, file)
     return average_values
 # route to handle logging in
 @app.route('/')
