@@ -132,16 +132,30 @@
 
         </div>
         <div class="col-3 L3" style="margin-left: -9%;margin-top: 1%;">
-            <svg width="174" height="40" viewBox="0 0 174 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg id="playButton" width="174" height="40" viewBox="0 0 174 40" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 11.1315L173.5 39" stroke="#DD7676" stroke-width="2" stroke-linejoin="round" />
                 <path d="M87.7529 1L79 11.241H97L87.7529 1Z" stroke="#DD7676" stroke-width="2"
                     stroke-linejoin="round" />
                 <ellipse cx="44.5494" cy="19.023" rx="5.51769" ry="4.44617" transform="rotate(-4.49542 44.5494 19.023)"
                     fill="#DD7676" />
             </svg>
-            <p style="position: relative;transform: rotateX(30deg) rotateY(-23deg) rotateZ(22deg);">{{ current_track[0]
+            <p style="position: relative;transform: rotateX(32deg) rotateY(-13deg) rotateZ(18deg);">{{ current_track[0]
                 }}</p>
+            <audio id="audio"
+                src="https://p.scdn.co/mp3-preview/7dec06e127a812b8dd5a4a68e653baf16b371b45?cid=56dd292a706c45939be4eb30a89b4cc4"></audio>
+            <script>
+                const playButton = document.getElementById('playButton');
+                const audio = document.getElementById('audio');
 
+                playButton.addEventListener('click', () => {
+                    if (audio.paused) {
+                        audio.play();
+                    } else {
+                        audio.pause();
+                    }
+                });
+            </script>
         </div>
     </div>
 
